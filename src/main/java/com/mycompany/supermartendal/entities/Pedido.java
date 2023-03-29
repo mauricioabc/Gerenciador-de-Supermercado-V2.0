@@ -7,37 +7,23 @@ public class Pedido {
     
     private List<Produto> produtosPedido;
     private double valorTotal;
-    int tipoPagamento;
-
+    FormaPagamento tipoPagamento;
+    private int qtdeParcelas;
+    
     public Pedido() {
         this.produtosPedido = new ArrayList<Produto>();
         this.valorTotal = 0.00;
     }
 
-    public boolean inserir(Produto novoProduto){
+    public boolean inserirProduto(Produto novoProduto){
         if(novoProduto.getNome().isEmpty() || novoProduto.getValor() <= 0)
             return false;
-            
         produtosPedido.add(novoProduto);
         atualizaValor();
         return true;
     }
-    public boolean editar(Produto produtoAntigo, Produto novoProduto){
-        if(novoProduto.getNome().isEmpty() || novoProduto.getValor() <= 0)
-            return false;
-        
-        for (Produto item : produtosPedido) {
-            if(produtoAntigo.equals(item)){
-                this.produtosPedido.remove(item);
-                this.produtosPedido.add(novoProduto);
-                atualizaValor();
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    public boolean excluir(Produto produto){
+    
+    public boolean excluirProduto(Produto produto){
         for (Produto item : produtosPedido) {
             if(produto.equals(item)){
                 this.produtosPedido.remove(item);
@@ -45,7 +31,6 @@ public class Pedido {
             }
             atualizaValor();
         }
-
         return false;
     }
     
@@ -57,7 +42,7 @@ public class Pedido {
         return valorTotal;
     }
 
-    public boolean setTipoPagamento(int tipoPagamento) {
+    public boolean setTipoPagamento(FormaPagamento tipoPagamento) {
         if(this.produtosPedido.isEmpty())
             return false;
         this.tipoPagamento = tipoPagamento;
