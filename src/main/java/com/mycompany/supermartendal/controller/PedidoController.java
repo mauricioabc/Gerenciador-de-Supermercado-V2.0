@@ -1,6 +1,6 @@
 package com.mycompany.supermartendal.controller;
 
-import com.mycompany.supermartendal.entities.FormaPagamento;
+import com.mycompany.supermartendal.entities.FormaPagamentoEnum;
 import com.mycompany.supermartendal.entities.Pedido;
 import com.mycompany.supermartendal.entities.Produto;
 
@@ -26,10 +26,10 @@ public class PedidoController {
        else return "Erro ao excluir produto do pedido.";
     }
     
-    public String registraPagamento(FormaPagamento formaPagamento) {
+    public String fecharPedido(FormaPagamentoEnum formaPagamento) {
        boolean result = this.pedido.setTipoPagamento(formaPagamento);
        
-       if(result) return "Forma de pagamento registrada com sucesso.";
+       if(result) return "Pedido fechado com sucesso.";
        else return "Erro ao registrar forma de pagamento.";
     }
     

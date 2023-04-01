@@ -1,7 +1,7 @@
 package com.mycompany.supermartendal.entities;
 
 
-public enum FormaPagamento {
+public enum FormaPagamentoEnum {
     dinheiro, debito, credito;
 }
 

@@ -6,7 +6,7 @@ package com.mycompany.supernartendalTest;
 
 import com.mycompany.supermartendal.entities.Pedido;
 import com.mycompany.supermartendal.controller.PedidoController;
-import com.mycompany.supermartendal.entities.FormaPagamento;
+import com.mycompany.supermartendal.entities.FormaPagamentoEnum;
 import com.mycompany.supermartendal.entities.Produto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -64,7 +64,7 @@ public class PedidoTest {
         controller.adicionarProduto(produto);
         produto = new Produto("PC Positivo", 300);
         controller.adicionarProduto(produto);
-        String result = controller.registraPagamento(FormaPagamento.credito);
+        String result = controller.registraPagamento(FormaPagamentoEnum.credito);
         assertEquals("Forma de pagamento registrada com sucesso.", result);
     }
     
@@ -74,14 +74,14 @@ public class PedidoTest {
         Produto produto = new Produto("PC Positivo", 200);
         controller.adicionarProduto(produto);
         
-        String result = controller.registraPagamento(FormaPagamento.credito);
+        String result = controller.registraPagamento(FormaPagamentoEnum.credito);
         assertEquals("Forma de pagamento registrada com sucesso.", result);
     }
     
     @Test
     public void deve_impedir_registrar_forma_de_pagamento_se_o_pedido_nao_tiver_produtos_inseridos(){
         PedidoController controller = new PedidoController();
-        String result = controller.registraPagamento(FormaPagamento.credito);
+        String result = controller.registraPagamento(FormaPagamentoEnum.credito);
         assertEquals("Erro ao registrar forma de pagamento.", result);
     }
     

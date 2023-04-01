@@ -7,7 +7,7 @@ public class Pedido {
     
     private List<Produto> produtosPedido;
     private double valorTotal;
-    FormaPagamento tipoPagamento;
+    FormaPagamentoEnum tipoPagamento;
     private int qtdeParcelas;
     
     public Pedido() {
@@ -42,7 +42,7 @@ public class Pedido {
         return valorTotal;
     }
 
-    public boolean setTipoPagamento(FormaPagamento tipoPagamento) {
+    public boolean setTipoPagamento(FormaPagamentoEnum tipoPagamento) {
         if(this.produtosPedido.isEmpty())
             return false;
         this.tipoPagamento = tipoPagamento;
