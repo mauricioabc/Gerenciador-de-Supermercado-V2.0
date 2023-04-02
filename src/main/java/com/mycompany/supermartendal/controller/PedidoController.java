@@ -1,15 +1,19 @@
 package com.mycompany.supermartendal.controller;
 
 import com.mycompany.supermartendal.entities.FormaPagamentoEnum;
+import com.mycompany.supermartendal.entities.Pagamento;
 import com.mycompany.supermartendal.entities.Pedido;
 import com.mycompany.supermartendal.entities.Produto;
+import java.util.List;
 
 public class PedidoController {
 
     private Pedido pedido;
+    private Pagamento pagamento;
     
     public PedidoController() {
         pedido = new Pedido();
+        pagamento = new Pagamento();
     }
     
     public String adicionarProduto(Produto produto){
@@ -35,8 +39,15 @@ public class PedidoController {
     
     public double retornaValorTotal() {
        double result = this.pedido.getValorTotal();
-       
        return result;
+    }
+ 
+    public List<String> realizaParcelamento(){
+        return pagamento.calcularParcelas(retornaValorTotal());
+    }
+    
+    public String processaPagamento(FormaPagamentoEnum formaPagamento, int qtdeParcelas) {
+       return pagamento.finalizarPedido(formaPagamento, retornaValorTotal(), qtdeParcelas);
     }
     
 }

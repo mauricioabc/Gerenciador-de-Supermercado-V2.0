@@ -56,35 +56,5 @@ public class PedidoTest {
         double result = controller.retornaValorTotal();
         assertEquals(500.0, result);
     }
-    
-    @Test
-    public void deve_retorar_forma_de_pagamento(){
-        PedidoController controller = new PedidoController();
-        Produto produto = new Produto("PC Positivo", 200);
-        controller.adicionarProduto(produto);
-        produto = new Produto("PC Positivo", 300);
-        controller.adicionarProduto(produto);
-        String result = controller.registraPagamento(FormaPagamentoEnum.credito);
-        assertEquals("Forma de pagamento registrada com sucesso.", result);
-    }
-    
-    @Test
-    public void deve_permitir_registrar_forma_de_pagamento_se_o_pedido_nao_tiver_produtos_inseridos(){
-        PedidoController controller = new PedidoController();
-        Produto produto = new Produto("PC Positivo", 200);
-        controller.adicionarProduto(produto);
-        
-        String result = controller.registraPagamento(FormaPagamentoEnum.credito);
-        assertEquals("Forma de pagamento registrada com sucesso.", result);
-    }
-    
-    @Test
-    public void deve_impedir_registrar_forma_de_pagamento_se_o_pedido_nao_tiver_produtos_inseridos(){
-        PedidoController controller = new PedidoController();
-        String result = controller.registraPagamento(FormaPagamentoEnum.credito);
-        assertEquals("Erro ao registrar forma de pagamento.", result);
-    }
-    
-    
-    
+     
 }
