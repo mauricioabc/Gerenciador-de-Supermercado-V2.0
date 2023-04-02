@@ -1,17 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package com.mycompany.supernartendalTest;
 
-import com.mycompany.supermartendal.entities.Pedido;
 import com.mycompany.supermartendal.controller.PedidoController;
-import com.mycompany.supermartendal.entities.FormaPagamentoEnum;
 import com.mycompany.supermartendal.entities.Produto;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +25,48 @@ public class PedidoTest {
        assertEquals("Produto inserido no pedido com sucesso.", result);
      }
      
+     @Test
+     public void deve_retornar_erro_ao_inserir_produto_com_valor_zerado_no_pedido() {
+       PedidoController controller = new PedidoController();
+       Produto novoProduto = new Produto("PC Positivo", 0);
+       
+       String result = controller.adicionarProduto(novoProduto);
+       
+       assertEquals("Erro ao inserir produto no pedido.", result);
+     }
+     
+     @Test
+     public void deve_retornar_erro_ao_inserir_produto_com_valor_negativo_no_pedido() {
+       PedidoController controller = new PedidoController();
+       Produto novoProduto = new Produto("PC Positivo", -100);
+       
+       String result = controller.adicionarProduto(novoProduto);
+       
+       assertEquals("Erro ao inserir produto no pedido.", result);
+     }
+     
+     @Test
+     public void deve_retornar_erro_ao_inserir_produto_sem_nome_no_pedido() {
+       PedidoController controller = new PedidoController();
+       Produto novoProduto = new Produto("", 200);
+       
+       String result = controller.adicionarProduto(novoProduto);
+       
+       assertEquals("Erro ao inserir produto no pedido.", result);
+     }
+     
+     @Test
+    public void deve_retornar_os_produtos_do_pedido(){
+        PedidoController controller = new PedidoController();
+        Produto produto = new Produto("PC Positivo", 200);
+        controller.adicionarProduto(produto);
+        produto = new Produto("PC Positivo", 300);
+        controller.adicionarProduto(produto);
+        
+        List result = controller.retornaProdutosPedido();
+        assertEquals(2, result.size());
+    }
+     
     @Test
     public void deve_excluir_produto_no_pedido(){
        PedidoController controller = new PedidoController();
@@ -46,6 +79,18 @@ public class PedidoTest {
     }
     
     @Test
+    public void deve_retornar_erro_ao_excluir_produto_no_pedido(){
+       PedidoController controller = new PedidoController();
+       Produto produto = new Produto("PC Positivo", 200);
+       controller.adicionarProduto(produto);
+       Produto produtoExcluir = new Produto("Mouse Positivo", 100);
+       
+       String result = controller.excluirProduto(produtoExcluir);
+       
+       assertEquals("Erro ao excluir produto do pedido.", result);
+    }
+    
+    @Test
     public void deve_retornar_valor_produtos(){
         PedidoController controller = new PedidoController();
         Produto produto = new Produto("PC Positivo", 200);
@@ -55,6 +100,18 @@ public class PedidoTest {
         
         double result = controller.retornaValorTotal();
         assertEquals(500.0, result);
+    }
+    
+    @Test
+    public void deve_retornar_valor_total_do_pedido_apos_edicoes(){
+        PedidoController controller = new PedidoController();
+        Produto produto = new Produto("PC Positivo", 200);
+        controller.adicionarProduto(produto);
+        produto = new Produto("PC Positivo", 300);
+        controller.excluirProduto(produto);
+        
+        double result = controller.retornaValorTotal();
+        assertEquals(200.0, result);
     }
      
 }

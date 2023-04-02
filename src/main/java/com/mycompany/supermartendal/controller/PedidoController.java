@@ -30,15 +30,13 @@ public class PedidoController {
        else return "Erro ao excluir produto do pedido.";
     }
     
-    public String fecharPedido(FormaPagamentoEnum formaPagamento) {
-       boolean result = this.pedido.setTipoPagamento(formaPagamento);
-       
-       if(result) return "Pedido fechado com sucesso.";
-       else return "Erro ao registrar forma de pagamento.";
-    }
-    
     public double retornaValorTotal() {
        double result = this.pedido.getValorTotal();
+       return result;
+    }
+    
+    public List<Produto> retornaProdutosPedido() {
+       List result = this.pedido.getProdutosPedido();
        return result;
     }
  

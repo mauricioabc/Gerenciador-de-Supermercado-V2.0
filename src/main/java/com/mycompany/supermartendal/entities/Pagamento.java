@@ -15,7 +15,7 @@ public class Pagamento {
         double parcelaMinima = 20.0;
         for (int i = 1; i <= maxParcelas; i++) {
             double valorParcela = valorTotal / i;
-            if (valorParcela >= parcelaMinima) {
+            if (valorParcela > parcelaMinima) {
                 parcelas.add(i + "x de R$ " + String.format("%.2f", valorParcela));
             }
         }

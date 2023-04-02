@@ -7,7 +7,7 @@ public class Estoque {
     private List<Produto> listaProdutos;
 
     public Estoque() {
-        this.listaProdutos = new ArrayList<Produto>();
+        this.listaProdutos = new ArrayList();
     }
     public boolean inserir(Produto novoProduto){
         if(novoProduto.getNome().isEmpty() || novoProduto.getValor() <= 0)

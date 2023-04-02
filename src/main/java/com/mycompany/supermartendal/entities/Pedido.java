@@ -7,11 +7,9 @@ public class Pedido {
     
     private List<Produto> produtosPedido;
     private double valorTotal;
-    FormaPagamentoEnum tipoPagamento;
-    private int qtdeParcelas;
     
     public Pedido() {
-        this.produtosPedido = new ArrayList<Produto>();
+        this.produtosPedido = new ArrayList();
         this.valorTotal = 0.00;
     }
 
@@ -27,9 +25,9 @@ public class Pedido {
         for (Produto item : produtosPedido) {
             if(produto.equals(item)){
                 this.produtosPedido.remove(item);
+                atualizaValor();
                 return true;
             }
-            atualizaValor();
         }
         return false;
     }
@@ -40,13 +38,6 @@ public class Pedido {
 
     public double getValorTotal() {
         return valorTotal;
-    }
-
-    public boolean setTipoPagamento(FormaPagamentoEnum tipoPagamento) {
-        if(this.produtosPedido.isEmpty())
-            return false;
-        this.tipoPagamento = tipoPagamento;
-        return true;
     }
     
     public void atualizaValor(){
