@@ -51,6 +51,26 @@ public class PagamentoTest {
     }
     
     @Test
+    public void fazParcelamentoDeCompra_TentaParcelar20Reais() {
+        PedidoController controller = new PedidoController();
+        Produto produto = new Produto("PC Positivo", 21);
+        controller.adicionarProduto(produto);
+        
+        List retorno = controller.realizaParcelamento();
+        assertEquals("1x de R$ 21,00", retorno.get(0));
+    }
+    
+    @Test
+    public void fazParcelamentoDeCompra_TentaParcelarValorMenorQue20() {
+        PedidoController controller = new PedidoController();
+        Produto produto = new Produto("PC Positivo", 15);
+        controller.adicionarProduto(produto);
+        
+        List retorno = controller.realizaParcelamento();
+        assertEquals(true, retorno.isEmpty());
+    }
+    
+    @Test
     public void verificaTamanhoDoRetornoDosParcelamentosEmCompraPequena_200Reais() {
         PedidoController controller = new PedidoController();
         Produto produto = new Produto("PC Positivo", 200);
